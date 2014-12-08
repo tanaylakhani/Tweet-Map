@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Twitter Sync - Tweets</title>
+</head>
+<script>
+// Twitter feed
+ $.ajax({
+  url: 'get_recent_tweets',
+  type: 'GET',
+  datatype:'json',
+  success: function(data, textStatus, xhr) {
+   var html = '';
+   for (var i = 0; i < data.length; i++) {
+    html = html +'<li class="latest-tweet"><p>' + data[i] + '</p></li>';
+   }
+   $('#tweets_container').append(html);
+});
+</script>
+</html>

@@ -1,0 +1,83 @@
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html" charset="utf-8" />
+        
+        <title>Multiple Markers Google Maps</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.11&sensor=false" type="text/javascript"></script>
+		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>
+		<script type="text/javascript">
+  function initialize() {
+    var center = new google.maps.LatLng(37.4419, -122.1419);
+
+    var map = new google.maps.Map(document.getElementById('map_canvas'), {
+      zoom:3,
+      center: center,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+	var infowindow = new google.maps.InfoWindow();
+    var markers = [];
+    {% for tweet in tweets %}
+	{% autoescape on %}
+
+	{% endautoescape %}
+	  var latitude = {{tweet.x}};
+	  var longitude = {{tweet.y}};
+      var latLng = new google.maps.LatLng(latitude, longitude);
+      var marker = new google.maps.Marker({position: latLng,labelContent: "Marker ID = " + {{forloop.counter0}}});
+	  markers.push(marker);
+	  //makeDiv({{forloop.counter0}}, 15, "Marker #");
+     google.maps.event.addListener(markers[{{forloop.counter0}}], 'click', function(e) {
+    infowindow.setContent('Tweet Text: '  + "{{ tweet.text |escapejs }}");
+    infowindow.open(map, this);});
+
+    {% endfor %}
+	var mcOptions = {gridSize: 50, maxZoom: 15};
+    var markerCluster = new MarkerClusterer(map, markers, mcOptions);
+	    var clusterOptions = { zoomOnClick: false }
+    var markerCluster = new MarkerClusterer(map, markers, clusterOptions);
+    globalMarker = markers.slice();
+    google.maps.event.addListener(markerCluster, 'clusterclick', function(cluster) {
+var content = '';
+
+// Convert lat/long from cluster object to a usable MVCObject
+var info = new google.maps.MVCObject;
+info.set('position', cluster.center_);
+
+//----
+//Get markers
+var markers = cluster.getMarkers();
+
+var titles = "";
+//Get all the titles
+for(var i = 0; i < markers.length; i++) {
+    titles += markers[i].labelContent + "\n";
+}
+//----
+
+
+infowindow.close();
+infowindow.setContent(titles); //set infowindow content to titles
+infowindow.open(map, info);
+
+google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() });
+
+});
+  }
+  function makeDiv(index, zoomLevel, content) {
+    document.getElementById("sidebar").innerHTML += '<div onclick="zoomIn(' + index + ',' + zoomLevel + ')">' + content + ' ' + index + '</div>';
+  }
+
+  function zoomIn(index, zoomLevel) {
+    map.setCenter(globalMarker[index].getPosition());
+    map.setZoom(zoomLevel);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+    </head>
+    <body>
+        <div id="map_canvas" style="width: 100%; height:100%;"></div>
+		<div id="sidebar"></div>
+    </body>
+</html>

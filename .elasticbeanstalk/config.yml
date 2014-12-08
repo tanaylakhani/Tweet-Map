@@ -1,0 +1,9 @@
+branch-defaults:
+  default:
+    environment: tweet-map-dev
+global:
+  application_name: tweet_map
+  default_ec2_keyname: tanay-cloud-computing
+  default_platform: Python 2.7
+  default_region: us-east-1
+  profile: eb-cli
