@@ -18,6 +18,20 @@ from TweetMap.settings import *
 from celery import Celery, task, current_task, shared_task
 from datetime import datetime
 
+from drealtime import iShoutClient
+ishout_client = iShoutClient()
+
+@task(queue='new_tweet_que')
+def new_tweet(tweet):
+    print 'new tweet: ', tweet.text
+    ishout_client.emit(
+        tweet.userid,
+        'notifications',
+        data={ 'tweet' : tweet }
+    )
+    # Some other things happening here..
+    #return HttpResponseRedirect(reverse('home'))
+    return render_to_response('tweet-map.html.html', ctx)
 
 consumer_key=TWITTER_CONSUMER_KEY
 consumer_secret=TWITTER_CONSUMER_SECRET
@@ -42,6 +56,7 @@ def get_tweet_sentiment(tweet_id):
     tweet.sentiment = response["docSentiment"]["type"]
     tweet.sentiment_score = response["docSentiment"]["score"]
     tweet.save()
+    new_tweet.delay(tweet)
 
 XY = []
 Coords = dict()
