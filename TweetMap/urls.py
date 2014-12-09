@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^tweet-sync/', 'TweetMap.views.tweet_sync', name='tweet-sync'),
     url(r'^get_recent_tweets/', 'twitter_service.views.get_recent_tweets'),
     url(r'^admin/', include(admin.site.urls)),
+    url('^notifications/', include(notifications.urls)),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

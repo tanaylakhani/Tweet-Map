@@ -1,117 +1,177 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'TwitterServiceTwitterfeed2'
-        db.create_table(u'twitter_service_twitterfeed2', (
-            ('id', self.gf('django.db.models.fields.IntegerField')(primary_key=True)),
-            ('userid', self.gf('django.db.models.fields.CharField')(max_length=255, db_column=u'UserID')),
-            ('date', self.gf('django.db.models.fields.CharField')(max_length=255, db_column=u'Date')),
-            ('x', self.gf('django.db.models.fields.CharField')(max_length=255, db_column=u'X')),
-            ('y', self.gf('django.db.models.fields.CharField')(max_length=255, db_column=u'Y')),
-            ('text', self.gf('django.db.models.fields.CharField')(max_length=255, db_column=u'Text')),
-            ('location', self.gf('django.db.models.fields.CharField')(max_length=255)),
-        ))
-        db.send_create_signal(u'twitter_service', ['TwitterServiceTwitterfeed2'])
+    dependencies = [
+    ]
 
-
-    def backwards(self, orm):
-        # Deleting model 'TwitterServiceTwitterfeed2'
-        db.delete_table(u'twitter_service_twitterfeed2')
-
-
-    models = {
-        u'twitter_service.authgroup': {
-            'Meta': {'object_name': 'AuthGroup', 'db_table': "u'auth_group'", 'managed': 'False'},
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'})
-        },
-        u'twitter_service.authgrouppermissions': {
-            'Meta': {'object_name': 'AuthGroupPermissions', 'db_table': "u'auth_group_permissions'", 'managed': 'False'},
-            'group_id': ('django.db.models.fields.IntegerField', [], {}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'permission_id': ('django.db.models.fields.IntegerField', [], {})
-        },
-        u'twitter_service.authpermission': {
-            'Meta': {'object_name': 'AuthPermission', 'db_table': "u'auth_permission'", 'managed': 'False'},
-            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type_id': ('django.db.models.fields.IntegerField', [], {}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'twitter_service.authuser': {
-            'Meta': {'object_name': 'AuthUser', 'db_table': "u'auth_user'", 'managed': 'False'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {}),
-            'email': ('django.db.models.fields.CharField', [], {'max_length': '75'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.IntegerField', [], {}),
-            'is_staff': ('django.db.models.fields.IntegerField', [], {}),
-            'is_superuser': ('django.db.models.fields.IntegerField', [], {}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-        },
-        u'twitter_service.authusergroups': {
-            'Meta': {'object_name': 'AuthUserGroups', 'db_table': "u'auth_user_groups'", 'managed': 'False'},
-            'group_id': ('django.db.models.fields.IntegerField', [], {}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'user_id': ('django.db.models.fields.IntegerField', [], {})
-        },
-        u'twitter_service.authuseruserpermissions': {
-            'Meta': {'object_name': 'AuthUserUserPermissions', 'db_table': "u'auth_user_user_permissions'", 'managed': 'False'},
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'permission_id': ('django.db.models.fields.IntegerField', [], {}),
-            'user_id': ('django.db.models.fields.IntegerField', [], {})
-        },
-        u'twitter_service.djangoadminlog': {
-            'Meta': {'object_name': 'DjangoAdminLog', 'db_table': "u'django_admin_log'", 'managed': 'False'},
-            'action_flag': ('django.db.models.fields.IntegerField', [], {}),
-            'action_time': ('django.db.models.fields.DateTimeField', [], {}),
-            'change_message': ('django.db.models.fields.TextField', [], {}),
-            'content_type_id': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'object_id': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'object_repr': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'user_id': ('django.db.models.fields.IntegerField', [], {})
-        },
-        u'twitter_service.djangocontenttype': {
-            'Meta': {'object_name': 'DjangoContentType', 'db_table': "u'django_content_type'", 'managed': 'False'},
-            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        u'twitter_service.djangosession': {
-            'Meta': {'object_name': 'DjangoSession', 'db_table': "u'django_session'", 'managed': 'False'},
-            'expire_date': ('django.db.models.fields.DateTimeField', [], {}),
-            'session_data': ('django.db.models.fields.TextField', [], {}),
-            'session_key': ('django.db.models.fields.CharField', [], {'max_length': '40', 'primary_key': 'True'})
-        },
-        u'twitter_service.southmigrationhistory': {
-            'Meta': {'object_name': 'SouthMigrationhistory', 'db_table': "u'south_migrationhistory'", 'managed': 'False'},
-            'app_name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'applied': ('django.db.models.fields.DateTimeField', [], {}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'migration': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        },
-        u'twitter_service.twitterservicetwitterfeed2': {
-            'Meta': {'object_name': 'TwitterServiceTwitterfeed2', 'db_table': "u'twitter_service_twitterfeed2'"},
-            'date': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_column': "u'Date'"}),
-            'id': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
-            'location': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_column': "u'Text'"}),
-            'userid': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_column': "u'UserID'"}),
-            'x': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_column': "u'X'"}),
-            'y': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_column': "u'Y'"})
-        }
-    }
-
-    complete_apps = ['twitter_service']
+    operations = [
+        migrations.CreateModel(
+            name='AuthGroup',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('name', models.CharField(unique=True, max_length=80)),
+            ],
+            options={
+                'db_table': 'auth_group',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='AuthGroupPermissions',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('group_id', models.IntegerField()),
+                ('permission_id', models.IntegerField()),
+            ],
+            options={
+                'db_table': 'auth_group_permissions',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='AuthPermission',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('name', models.CharField(max_length=50)),
+                ('content_type_id', models.IntegerField()),
+                ('codename', models.CharField(max_length=100)),
+            ],
+            options={
+                'db_table': 'auth_permission',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='AuthUser',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('password', models.CharField(max_length=128)),
+                ('last_login', models.DateTimeField()),
+                ('is_superuser', models.IntegerField()),
+                ('username', models.CharField(unique=True, max_length=30)),
+                ('first_name', models.CharField(max_length=30)),
+                ('last_name', models.CharField(max_length=30)),
+                ('email', models.CharField(max_length=75)),
+                ('is_staff', models.IntegerField()),
+                ('is_active', models.IntegerField()),
+                ('date_joined', models.DateTimeField()),
+            ],
+            options={
+                'db_table': 'auth_user',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='AuthUserGroups',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('user_id', models.IntegerField()),
+                ('group_id', models.IntegerField()),
+            ],
+            options={
+                'db_table': 'auth_user_groups',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='AuthUserUserPermissions',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('user_id', models.IntegerField()),
+                ('permission_id', models.IntegerField()),
+            ],
+            options={
+                'db_table': 'auth_user_user_permissions',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='DjangoAdminLog',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('action_time', models.DateTimeField()),
+                ('user_id', models.IntegerField()),
+                ('content_type_id', models.IntegerField(null=True, blank=True)),
+                ('object_id', models.TextField(blank=True)),
+                ('object_repr', models.CharField(max_length=200)),
+                ('action_flag', models.IntegerField()),
+                ('change_message', models.TextField()),
+            ],
+            options={
+                'db_table': 'django_admin_log',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='DjangoContentType',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('name', models.CharField(max_length=100)),
+                ('app_label', models.CharField(max_length=100)),
+                ('model', models.CharField(max_length=100)),
+            ],
+            options={
+                'db_table': 'django_content_type',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='DjangoSession',
+            fields=[
+                ('session_key', models.CharField(max_length=40, serialize=False, primary_key=True)),
+                ('session_data', models.TextField()),
+                ('expire_date', models.DateTimeField()),
+            ],
+            options={
+                'db_table': 'django_session',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SouthMigrationhistory',
+            fields=[
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('app_name', models.CharField(max_length=255)),
+                ('migration', models.CharField(max_length=255)),
+                ('applied', models.DateTimeField()),
+            ],
+            options={
+                'db_table': 'south_migrationhistory',
+                'managed': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='TwitterServiceTwitterfeed2',
+            fields=[
+                ('id', models.AutoField(serialize=False, primary_key=True)),
+                ('userid', models.CharField(max_length=255, db_column='UserID')),
+                ('date', models.CharField(max_length=255, db_column='Date')),
+                ('x', models.CharField(max_length=255, db_column='X')),
+                ('y', models.CharField(max_length=255, db_column='Y')),
+                ('text', models.CharField(max_length=255, db_column='Text')),
+                ('location', models.CharField(max_length=255)),
+                ('sentiment', models.CharField(max_length=255, null=True, blank=True)),
+                ('sentiment_score', models.DecimalField(default=0, max_digits=8, decimal_places=6)),
+            ],
+            options={
+                'db_table': 'twitter_service_twitterfeed2',
+                'managed': True,
+            },
+            bases=(models.Model,),
+        ),
+    ]
