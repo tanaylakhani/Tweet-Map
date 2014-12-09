@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'djcelery',
     'tweepy',
     'twitter_service',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
