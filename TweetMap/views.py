@@ -15,7 +15,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
    
 def home(request):
     tweets = TwitterServiceTwitterfeed2.objects.all().filter(x__isnull = False,y__isnull = False)[0:20000]
-    tweet_count = tweets = TwitterServiceTwitterfeed2.objects.all().filter(x__isnull = False,y__isnull = False).count()
+    tweet_count = TwitterServiceTwitterfeed2.objects.all().filter(x__isnull = False,y__isnull = False).count()
     context = {'tweets' : tweets,'tweet_count': tweet_count}
     return render_to_response("tweet-map.html", {'tweets' : tweets}, RequestContext(request))
 
