@@ -85,13 +85,17 @@ google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <script>
+window.setInterval(function(){
+  /// call your function here
+  refresh_count()
+}, 5000);
 function refresh_count() {
 	$.ajax({
 			url: 'http://ec2-54-164-195-102.compute-1.amazonaws.com/notification/'
 		, data: {}
 		, method: 'POST'
 		, success: function (response) {
-				
+				alert(response.data.tweet_count);
 				$('.descr').text(response.data.tweet_count + ((response.data.tweet_count == 0) ? ' Tweets' : ' Tweets'));
 			}
 		, error: function (response) {
