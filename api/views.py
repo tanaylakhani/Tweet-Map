@@ -83,7 +83,10 @@ def parse_places_api(location, access_token):
     #string = 'abcdefghijklmnopqrstuvwxyz'
     try:
         filename = ''.join(random.choice(string.lowercase) for x in range(10))
-        fo = open('TweetMap/static/'+filename+".json", "w+")
+        dir = os.path.dirname('/home/ubuntu/tweet_map/TweetMap/static/'+filename+'.json')
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+        fo = open('/home/ubuntu/tweet_map/TweetMap/static/'+filename+'.json', "w+")
         fo.seek(0, 2)
         line = fo.write( json.dumps(json_http_response) )
     except Exception,e:
