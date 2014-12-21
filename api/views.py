@@ -113,17 +113,26 @@ def get_place_details(placeId, access_token):
     ''' This method gets details of places using facebook graph api '''
     try:
         data = {}
-        url = 'https://graph.facebook.com/' + placeId + '?fields=photos.limit(1).type(profile),description_html,location,checkins&access_token=' + access_token
+        url = 'https://graph.facebook.com/' + placeId + '?fields=photos.limit(1).type(profile),location,checkins,name,description,id,category&access_token=' + access_token
         r = requests.get(url)
         json_response = json.loads(r.text)
         checkins = json_response['checkins']
         longitude = json_response['location']['longitude']
         latitude = json_response['location']['latitude']
-        #print json_response['photos']
-        place_id = json_response['photos']['data'][0]['from']['id']
-        title = json_response['photos']['data'][0]['from']['name']
-        profile_pic = json_response['photos']['data'][0]['source']
-        data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude }
+        #place_id = json_response['photos']['data'][0]['from']['id']
+        place_id = json_response['id']
+        #title = json_response['photos']['data'][0]['from']['name']
+        title = json_response['name']
+        if json_response['description']:
+            description = json_response['description']
+        else:
+            description=""
+        category = json_response['category']
+        if json_response['photos']:
+            profile_pic = json_response['photos']['data'][0]['source']
+        else:
+            profile_pic = 'https://cdn0.iconfinder.com/data/icons/navigation-4/100/16-256.png'
+        data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude, 'checkins':checkins, 'category':category, 'id':place_id }
     except Exception,e:
         print e
         pass
