@@ -31,7 +31,7 @@ def api_v1_canvas(request):
         print "access_token:" + access_token
         text_location = request.POST.get('text_location')
         print "location" + text_location
-        gps_location = request.POST.get('gps_location')
+        gps_location = request.POST.get('gps_location').decode('utf8') 
         if text_location is not None:
             geo = geolocator.geocode(text_location)
             if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
