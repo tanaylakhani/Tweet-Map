@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^get_recent_tweets/', 'twitter_service.views.get_recent_tweets'),
     url(r'^admin/', include(admin.site.urls)),
     url('^notifications/', 'TweetMap.views.tweet_count'),
+    url('^api_places/', 'api.views.api_v1_canvas'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

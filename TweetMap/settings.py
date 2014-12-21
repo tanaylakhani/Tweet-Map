@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'tweepy',
     'twitter_service',
     'rest_framework',
+    #'foursquare',
+    'api',
 )
 
 MIDDLEWARE_CLASSES = (
