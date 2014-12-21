@@ -32,6 +32,7 @@ def api_v1_canvas(request):
         text_location = request.POST.get('text_location')
         print "location" + text_location
         gps_location = request.POST.get('gps_location').decode('utf8') 
+        print gps_location
         if text_location is not None:
             geo = geolocator.geocode(text_location)
             if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
