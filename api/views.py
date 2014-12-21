@@ -40,8 +40,11 @@ def api_v1_canvas(request):
                     print geo.latitude
                     print geo.longitude
                     location = str(geo.latitude) + "," + str(geo.longitude)
+                else:
+                    pass
             else:
-                location =  gps_location
+                location = gps_location
+                print "location: " + str(location)
                 pass
             print "location: " + str(location)
             filename = parse_places_api(location, access_token)
