@@ -37,11 +37,11 @@ def api_v1_canvas(request):
             if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
                 print geo.latitude
                 print geo.longitude
-                location = geo.latitude + "," + geo.longitude
+                location = str(geo.latitude) + "," + str(geo.longitude)
         else:
             location =  gps_location
             pass
-        #print "location: " + str(location)
+        print "location: " + str(location)
         filename = parse_places_api(location, access_token)
         return HttpResponse(json.dumps({'success':True,'filename':filename}), content_type="application/javascript; charset=utf-8")
         #return 
