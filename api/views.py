@@ -11,6 +11,7 @@ import urllib2
 import requests
 import random
 import string
+import os
 #from foursquare import *
 #import foursquare
 #from TweetMap.settings import YOUR_CLIENT_ID, YOUR_CLIENT_SECRET
