@@ -26,24 +26,27 @@ def getResponse(data):
 @csrf_exempt
 def api_v1_canvas(request):
     if request.method == 'POST':
-        geolocator = Nominatim()
-        access_token = request.POST.get('access_token')
-        print "access_token:" + access_token
-        text_location = request.POST.get('text_location')
-        print "location" + text_location
-        gps_location = request.POST.get('gps_location').decode('utf8') 
-        print gps_location
-        if text_location is not None:
-            geo = geolocator.geocode(text_location)
-            if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
-                print geo.latitude
-                print geo.longitude
-                location = str(geo.latitude) + "," + str(geo.longitude)
-        else:
-            location =  gps_location
-            pass
-        print "location: " + str(location)
-        filename = parse_places_api(location, access_token)
+        try:
+            geolocator = Nominatim()
+            access_token = request.POST.get('access_token')
+            print "access_token:" + access_token
+            text_location = request.POST.get('text_location')
+            print "location" + text_location
+            gps_location = request.POST.get('gps_location').decode('utf8') 
+            print gps_location
+            if text_location is not None:
+                geo = geolocator.geocode(text_location)
+                if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
+                    print geo.latitude
+                    print geo.longitude
+                    location = str(geo.latitude) + "," + str(geo.longitude)
+            else:
+                location =  gps_location
+                pass
+            print "location: " + str(location)
+            filename = parse_places_api(location, access_token)
+        except Exception,e:
+            print e
         return HttpResponse(json.dumps({'success':True,'filename':filename}), content_type="application/javascript; charset=utf-8")
         #return 
         
