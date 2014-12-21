@@ -123,12 +123,12 @@ def get_place_details(placeId, access_token):
         place_id = json_response['id']
         #title = json_response['photos']['data'][0]['from']['name']
         title = json_response['name']
-        if not json_response['description']:
+        if 'description' not in json_response:
             description=""
         else:
             description = json_response['description']
         category = json_response['category']
-        if not json_response['photos']:
+        if 'photos' not in json_response:
             profile_pic = 'https://cdn0.iconfinder.com/data/icons/navigation-4/100/16-256.png'
         else:
             profile_pic = json_response['photos']['data'][0]['source']
