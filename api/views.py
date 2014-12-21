@@ -141,7 +141,11 @@ def get_place_details(placeId, access_token):
             profile_pic = 'https://cdn4.iconfinder.com/data/icons/bharati-seo-icons/512/place-512.png'
         else:
             profile_pic = json_response['photos']['data'][0]['source']
-        data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude, 'checkins':checkins, 'category':category, 'id':place_id, 'description': description[:50] }
+        url = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q='+ title + " places"
+        img = requests.get(url)
+        img_json_response = json.loads(img.text)
+        images = img_json_response['responseData']['results'][0]['unescapedUrl'] + ","+ img_json_response['responseData']['results'][1]['unescapedUrl'] + ","+img_json_response['responseData']['results'][2]['unescapedUrl'] + ","+img_json_response['responseData']['results'][3]['unescapedUrl']
+        data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude, 'checkins':checkins, 'category':category, 'id':place_id, 'description': description,'images':images }
     except Exception,e:
         print e
         pass
