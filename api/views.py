@@ -122,7 +122,7 @@ def get_place_details(placeId, access_token):
         #place_id = json_response['photos']['data'][0]['from']['id']
         place_id = json_response['id']
         #title = json_response['photos']['data'][0]['from']['name']
-        title = json_response['name']
+        title = json_response['name'].encode('utf-8')
         if 'description' not in json_response:
             description=""
         else:
