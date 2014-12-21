@@ -28,6 +28,7 @@ def api_v1_canvas(request):
     if request.method == 'POST':
         try:
             geolocator = Nominatim()
+            location = ""
             access_token = request.POST.get('access_token')
             print "access_token:" + access_token
             text_location = request.POST.get('text_location')
@@ -42,11 +43,12 @@ def api_v1_canvas(request):
                     location = str(geo.latitude) + "," + str(geo.longitude)
                 else:
                     pass
+                    print "error 1"
             else:
-                location = gps_location
-                print "location: " + str(location)
+                print "error 2"
+                location = str(gps_location)
+                print "location: " + location
                 pass
-            print "location: " + str(location)
             filename = parse_places_api(location, access_token)
         except Exception,e:
             print e
