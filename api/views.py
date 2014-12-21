@@ -35,10 +35,13 @@ def api_v1_canvas(request):
         if text_location is not None:
             geo = geolocator.geocode(text_location)
             if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
+                print geo.latitude
+                print geo.longitude
                 location = geo.latitude + "," + geo.longitude
         else:
             location =  gps_location
-        print "location: " + str(location)
+            pass
+        #print "location: " + str(location)
         filename = parse_places_api(location, access_token)
         return HttpResponse(json.dumps({'success':True,'filename':filename}), content_type="application/javascript; charset=utf-8")
         #return 
