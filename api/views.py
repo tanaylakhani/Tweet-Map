@@ -26,7 +26,9 @@ def getResponse(data):
 def api_v1_canvas(request):
     if request.method == 'POST':
         access_token = request.POST.get('access_token')
+        print access_token
         location = request.POST.get('location')
+        print location
         filename = parse_places_api(location, access_token)
         return HttpResponse(json.dumps({'success':True,'filename':filename}), content_type="application/javascript; charset=utf-8")
         #return 
