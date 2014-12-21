@@ -9,6 +9,8 @@ from datetime import date,timedelta,datetime
 import urllib
 import urllib2
 import requests
+import random
+import string
 #from foursquare import *
 #import foursquare
 #from TweetMap.settings import YOUR_CLIENT_ID, YOUR_CLIENT_SECRET
@@ -21,11 +23,11 @@ def getResponse(data):
     return response
 @csrf_exempt
 def api_v1_canvas(request):
-    if request.method == 'GET':
-        access_token = request.GET.get('access_token')
-        location = request.GET.get('location')
-        serialized_data = parse_places_api(location, access_token)
-        return getResponse(serialized_data)
+    if request.method == 'POST':
+        access_token = request.POST.get('access_token')
+        location = request.POST.get('location')
+        filename = parse_places_api(location, access_token)
+        return HttpResponse(json.dumps({'success':True,'filename':filename}), content_type="application/javascript; charset=utf-8")
         #return 
         
 def parse_places_api(location, access_token):
@@ -78,7 +80,15 @@ def parse_places_api(location, access_token):
     #db.jobs.update(eachPlace, {'$set':{'StateLastProcess':datetime.datetime.now(), 'state':'completed'}})
     #conn.disconnect()
     #print json_http_response
-    return json_http_response
+    #string = 'abcdefghijklmnopqrstuvwxyz'
+    try:
+        filename = ''.join(random.choice(string.lowercase) for x in range(10))
+        fo = open('TweetMap/static/'+filename+".json", "w+")
+        fo.seek(0, 2)
+        line = fo.write( json.dumps(json_http_response) )
+    except Exception,e:
+        print e
+    return filename
 
 def get_place_details(placeId, access_token):
     ''' This method gets details of places using facebook graph api '''
