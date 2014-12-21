@@ -138,7 +138,7 @@ def get_place_details(placeId, access_token):
             description = json_response['description']
         category = json_response['category']
         if 'photos' not in json_response:
-            profile_pic = 'https://cdn0.iconfinder.com/data/icons/navigation-4/100/16-256.png'
+            profile_pic = 'https://cdn4.iconfinder.com/data/icons/bharati-seo-icons/512/place-512.png'
         else:
             profile_pic = json_response['photos']['data'][0]['source']
         data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude, 'checkins':checkins, 'category':category, 'id':place_id, 'description': description[:50] }
