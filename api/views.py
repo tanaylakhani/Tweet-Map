@@ -123,15 +123,15 @@ def get_place_details(placeId, access_token):
         place_id = json_response['id']
         #title = json_response['photos']['data'][0]['from']['name']
         title = json_response['name']
-        if json_response['description']:
-            description = json_response['description']
-        else:
+        if not json_response['description']:
             description=""
-        category = json_response['category']
-        if json_response['photos']:
-            profile_pic = json_response['photos']['data'][0]['source']
         else:
+            description = json_response['description']
+        category = json_response['category']
+        if not json_response['photos']:
             profile_pic = 'https://cdn0.iconfinder.com/data/icons/navigation-4/100/16-256.png'
+        else:
+            profile_pic = json_response['photos']['data'][0]['source']
         data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude, 'checkins':checkins, 'category':category, 'id':place_id }
     except Exception,e:
         print e
