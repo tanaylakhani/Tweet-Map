@@ -12,6 +12,7 @@ import requests
 import random
 import string
 import os
+from geopy.geocoders import Nominatim
 #from foursquare import *
 #import foursquare
 #from TweetMap.settings import YOUR_CLIENT_ID, YOUR_CLIENT_SECRET
@@ -27,8 +28,16 @@ def api_v1_canvas(request):
     if request.method == 'POST':
         access_token = request.POST.get('access_token')
         print "access_token:" + access_token
-        location = request.POST.get('location')
-        print "location" + location
+        text_location = request.POST.get('text_location')
+        print "location" + text_location
+        gps_location = request.POST.get('gps_location')
+        if text_location is not None:
+            geo = geolocator.geocode(text_location)
+            if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
+                location = geo.latitude + "," + geo.longitude
+        else:
+            location =  gps_location
+        print "location: " + location
         filename = parse_places_api(location, access_token)
         return HttpResponse(json.dumps({'success':True,'filename':filename}), content_type="application/javascript; charset=utf-8")
         #return 
