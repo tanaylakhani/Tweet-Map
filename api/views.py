@@ -138,7 +138,7 @@ def get_place_details(placeId, access_token):
             description = json_response['description']
         category = json_response['category']
         if 'photos' not in json_response:
-            profile_pic = 'https://cdn4.iconfinder.com/data/icons/bharati-seo-icons/512/place-512.png'
+            profile_pic = 'https://cdn0.iconfinder.com/data/icons/business-mix/512/location-512.png'
         else:
             profile_pic = json_response['photos']['data'][0]['source']
         url = 'http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q='+ title + " places"
