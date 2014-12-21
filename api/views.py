@@ -10,7 +10,7 @@ import urllib
 import urllib2
 import requests
 #from foursquare import *
-import foursquare
+#import foursquare
 from TweetMap.settings import YOUR_CLIENT_ID, YOUR_CLIENT_SECRET
 # Create your views here.
 def getResponse(data):
