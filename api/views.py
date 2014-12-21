@@ -21,9 +21,9 @@ def getResponse(data):
     return response
 @csrf_exempt
 def api_v1_canvas(request):
-    if request.method == 'POST':
-        access_token = request.POST.get('access_token')
-        location = request.POST.get('location')
+    if request.method == 'GET':
+        access_token = request.GET.get('access_token')
+        location = request.GET.get('location')
         serialized_data = parse_places_api(location, access_token)
         return getResponse(serialized_data)
         #return 
