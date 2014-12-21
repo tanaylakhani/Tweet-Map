@@ -38,7 +38,7 @@ def api_v1_canvas(request):
                 location = geo.latitude + "," + geo.longitude
         else:
             location =  gps_location
-        print "location: " + location
+        print "location: " + str(location)
         filename = parse_places_api(location, access_token)
         return HttpResponse(json.dumps({'success':True,'filename':filename}), content_type="application/javascript; charset=utf-8")
         #return 
