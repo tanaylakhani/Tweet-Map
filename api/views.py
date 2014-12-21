@@ -26,6 +26,7 @@ def getResponse(data):
 @csrf_exempt
 def api_v1_canvas(request):
     if request.method == 'POST':
+        geolocator = Nominatim()
         access_token = request.POST.get('access_token')
         print "access_token:" + access_token
         text_location = request.POST.get('text_location')
