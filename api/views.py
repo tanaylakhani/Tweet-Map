@@ -76,7 +76,7 @@ def parse_places_api(location, access_token):
             #json_http_response = ', '.join(json_http_response + [str(placeDetails)])
             ##db.placeDetails.update(placeDetails, placeDetails, True)
         except Exception, e:
-            print e
+            #print e
             print "Data could not be saved"
             continue
         #db.jobs.update(eachPlace, {'$set':{'StateLastProcess':datetime.datetime.now(), 'state':'processing'}})
@@ -106,7 +106,7 @@ def get_place_details(placeId, access_token):
         checkins = json_response['checkins']
         longitude = json_response['location']['longitude']
         latitude = json_response['location']['latitude']
-        print json_response['photos']
+        #print json_response['photos']
         place_id = json_response['photos']['data'][0]['from']['id']
         title = json_response['photos']['data'][0]['from']['name']
         profile_pic = json_response['photos']['data'][0]['source']
