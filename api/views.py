@@ -32,9 +32,9 @@ def api_v1_canvas(request):
             access_token = request.POST.get('access_token')
             print "access_token:" + access_token
             text_location = request.POST.get('text_location')
-            print "location" + text_location
+            #print "location" + text_location
             gps_location = request.POST.get('gps_location').decode('utf8') 
-            print gps_location
+            #print gps_location
             if text_location:
                 geo = geolocator.geocode(text_location)
                 if hasattr(geo, 'latitude') and hasattr(geo, 'longitude'):
@@ -141,7 +141,7 @@ def get_place_details(placeId, access_token):
             profile_pic = 'https://cdn0.iconfinder.com/data/icons/navigation-4/100/16-256.png'
         else:
             profile_pic = json_response['photos']['data'][0]['source']
-        data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude, 'checkins':checkins, 'category':category, 'id':place_id, 'description': description }
+        data = { 'title' : str(title), 'image' : str(profile_pic), 'rating' : 3.0, 'releaseYear' : 2014, 'genre' : ['action', 'drama'], 'latitude':latitude, 'longitude':longitude, 'checkins':checkins, 'category':category, 'id':place_id, 'description': description[:50] }
     except Exception,e:
         print e
         pass
