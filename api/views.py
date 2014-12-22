@@ -67,7 +67,7 @@ def parse_places_api(location, access_token):
         'center':location,
         'type':'place',
         'access_token':access_token,
-        'limit':10
+        'limit':25
     }
     r = requests.get(url,params=payload)
     json_response = json.loads(r.text)
