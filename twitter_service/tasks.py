@@ -18,17 +18,17 @@ from TweetMap.settings import *
 from celery import Celery, task, current_task, shared_task
 from datetime import datetime
 
-from drealtime import iShoutClient
-ishout_client = iShoutClient()
+# from drealtime import iShoutClient
+# ishout_client = iShoutClient()
 
 @task(queue='new_tweet_que')
 def new_tweet(tweet):
     print 'new tweet: ', tweet.text
-    ishout_client.emit(
-        tweet.userid,
-        'notifications',
-        data={ 'tweet' : tweet }
-    )
+    # #ishout_client.emit(
+        # tweet.userid,
+        # 'notifications',
+        # data={ 'tweet' : tweet }
+    # )
     # Some other things happening here..
     #return HttpResponseRedirect(reverse('home'))
     return render_to_response('tweet-map.html.html', ctx)
